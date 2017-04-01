@@ -19,6 +19,18 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use('/dist', express.static(ASSETS_DIR));
 
+app.post("/api/getPage",function (req,res) {
+    res.json({
+        name:"dongxiaoyue",
+        age:18
+    });
+});
+
+
+
+
+
+
 
 app.get("/*",function (req,res) {
     console.log(__dirname);
