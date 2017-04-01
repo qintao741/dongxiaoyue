@@ -1,10 +1,14 @@
 var path = require('path');
+var webpack = require("webpack");
 
 module.exports = {
-    entry: './src/main.js',
+    entry: ['./src/main.js',
+        'webpack-hot-middleware/client',
+    ],
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/dist/'
     },
     module: {
         loaders: [
@@ -17,11 +21,12 @@ module.exports = {
                 }
             },
             {
-                loader: 'file-loader',
-                query: {
-                    useRelativePath: process.env.NODE_ENV === "production"
-                }
+                test: /\.css/,
+                loaders: ["style-loader","css-loader"]
             }
         ]
-    }
+    },
+    plugins:[
+        new webpack.HotModuleReplacementPlugin(),
+    ]
 };
